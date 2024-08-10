@@ -1,0 +1,6 @@
+env: dev
+database:
+  user: "vault:secret/data/myapp/db/user"
+  password: "vault:secret/data/myapp/db/password"
+api:
+  key: "vault:secret/data/myapp/api/key"
