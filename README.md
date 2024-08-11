@@ -80,7 +80,7 @@ api#key
 12:46:14 Unable to read secret: 403 Forbidden: 2 errors occurred:
         * permission denied
         * invalid token
-```
+
 > set VAULT_TOKEN=vault token
 > go run .\main.go run --show
 
