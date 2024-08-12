@@ -130,3 +130,45 @@ Viper settings after Vault update:
 12:53:58 database.password: password
 12:53:58 database.user: user
 ```
+# Docker support for running vault
+
+Start docker container running
+
+```
+docker pull hashicorp/vault:latest
+```
+```
+docker compose up -d
+```
+Make a note of the docker machine IP addres.
+
+```
+set VAULT_TOKEN=root
+set VAULT_ADDR=http://192.168.99.100:8200
+
+go run .\main.go setup
+21:09:45 Using config file: vaultpoc\config\config.yaml
+21:09:45 key: vaultpoc/api, Value: key=apikey
+21:09:45 secret written successfully to vaultpoc/api
+21:09:45 key: vaultpoc/db, Value: user=user, password=password
+21:09:45 secret written successfully to vaultpoc/db
+
+go run .\main.go run -s
+21:09:59 Using config file: vaultpoc\config\config.yaml
+21:09:59 Update viper config database.user from vault:secret/data/vaultpoc/db#user
+21:09:59 Update viper config database.password from vault:secret/data/vaultpoc/db#password
+21:09:59 Update viper config api.key from vault:secret/data/vaultpoc/api#key
+21:09:59
+
+Viper settings after Vault update:
+21:09:59 database.user: user
+21:09:59 database.password: password
+21:09:59 api.key: apikey
+21:09:59 env: dev
+```
+
+And finally, you can stop docker.
+
+```
+docker compose down
+```
